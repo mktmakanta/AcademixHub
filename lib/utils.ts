@@ -1,14 +1,12 @@
-import { type ClassValue, clsx } from 'clsx';
-
-export function cn(...inputs: ClassValue[]) {
-  return inputs.filter(Boolean).join(' ');
+export function cn(...inputs: (string | undefined | null | false)[]) {
+  return inputs.filter(Boolean).join(" ");
 }
 
 export function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+  return new Date(dateString).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
 }
 
@@ -25,22 +23,22 @@ export function formatTimeAgo(dateString: string): string {
   if (diffDays > 0) return `${diffDays}d ago`;
   if (diffHours > 0) return `${diffHours}h ago`;
   if (diffMins > 0) return `${diffMins}m ago`;
-  return 'just now';
+  return "just now";
 }
 
 export function getInitials(name: string | null): string {
-  if (!name) return '?';
+  if (!name) return "?";
   return name
-    .split(' ')
+    .split(" ")
     .map((n) => n[0])
-    .join('')
+    .join("")
     .toUpperCase()
     .slice(0, 2);
 }
 
 export function getPublicImageUrl(
   bucket: string,
-  path: string | null
+  path: string | null,
 ): string | null {
   if (!path) return null;
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
